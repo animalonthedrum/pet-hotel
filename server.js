@@ -70,3 +70,19 @@ if(err){
 }//end else
 });//end pool connect
 });// end post
+app.post('/pet', function(req,res){
+  console.log('I like pets2:', req.body);
+  pool.connect(function(err, connection, done){
+  if(err){
+  console.log('error');
+  done();
+  res.send(400);
+  }else {
+  console.log('connected');
+  connection.query("UPDATE pet_table SET pet = $1, color = $2, breed = $3 WHERE owner= $4", [req.body.name,req.body.color,req.body.breed, req.body.owner]);
+  done();
+  res.send(200);
+  }//end else
+  });//end pool connect
+
+});//end post

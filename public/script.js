@@ -2,8 +2,9 @@ $(document).ready(function(){
   console.log('JQ');
 
 $('#registerOwner').on('click', ownerName);
-
+$('#addPet').on('click', petInfo);
 dropDown();
+
 
 });// end on ready
 
@@ -28,10 +29,30 @@ var dropDown = function(){
     url: '/owner',
     success: function(response){
       console.log('meow', response);
-    }
-
-
+        $('.owners').empty();
+    for(var i = 0; i<response.length; i++){
+    $('#owners').append('<option>' + response[i].owner + '</option>');
+}
+}
   });//
 
 
+};
+
+var petInfo = function(){
+  var petToSend = {
+    name: $('#petName').val(),
+    color: $('#color').val(),
+    breed: $('#breed').val(),
+    owner:$('#owners').val()
+};// end petToSend
+console.log(petToSend);
+$.ajax({
+  type: 'POST',
+  url: '/pet',
+  data: petToSend,
+  success: function(response){
+    console.log('ribbet:', response);
+  }//end success
+});//end ajax post
 };
