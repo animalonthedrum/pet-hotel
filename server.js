@@ -30,7 +30,43 @@ app.get('/', function(req,res){
   res.sendFile(path.resolve( 'views/index.html') );
 });//end base url
 
+app.get('/owner', function(req, res){
+  console.log('drop down');
+  pool.connect(function(err, connection, done){
+    if(err){
+      console.log('error');
+      done();
+      res.send(400);
+    }else {
+      console.log('connected to db');
+      var allOwners = [];
+      var resultSet = connection.query('SELECT * FROM pet_table');
+      resultSet.on('row', function(row){
+        allOwners.push(row);
+      });//end resultSet
+      resultSet.on('end', function(){
+        done();
+        res.send(allOwners);
+      });//end end resultSet
+
+    }
+  });//done pool get
+});//end get
+
+
+
 app.post('/owner', function(req,res){
   console.log('I like pets:', req.body);
-  res.sendStatus(200);
-} );// end post
+pool.connect(function(err, connection, done){
+if(err){
+  console.log('error');
+  done();
+  res.send(400);
+}else {
+  console.log('connected to database');
+  connection.query("INSERT INTO pet_table(Owner) values ($1)", [req.body.name]);
+  done();
+  res.send(200);
+}//end else
+});//end pool connect
+});// end post

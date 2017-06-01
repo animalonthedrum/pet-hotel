@@ -3,6 +3,7 @@ $(document).ready(function(){
 
 $('#registerOwner').on('click', ownerName);
 
+dropDown();
 
 });// end on ready
 
@@ -18,5 +19,19 @@ $.ajax({
     console.log('woof:', response);
   }//end success
 });//end ajax post
+dropDown();
+};// end owner function
+
+var dropDown = function(){
+  $.ajax ({
+    type: 'GET',
+    url: '/owner',
+    success: function(response){
+      console.log('meow', response);
+    }
+
+
+  });//
+
 
 };
