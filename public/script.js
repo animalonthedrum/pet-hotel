@@ -5,6 +5,12 @@ $(document).ready(function() {
   $('#addPet').on('click', petInfo);
   dropDown();
   tableTime();
+  // $('#update').on('click', updateInfo);
+  $('#myTable').on('click', '#update', function() {
+    var id = $(this).data("id");
+    console.log(id);
+
+  });
 
 }); // end on ready
 
@@ -67,17 +73,36 @@ var tableTime = function() {
 
 
       for (var i = 0; i < response.length; i++) {
-        var tableRow = '<tr>';
-        tableRow += '<td>' + response[i].owner + '</td>';
-        tableRow += '<td>' + response[i].pet + '</td>';
-        tableRow += '<td>' + response[i].breed + '</td>';
-        tableRow += '<td>' + response[i].color + '</td>';
-        tableRow += '<td><button>GO</button></td>';
-        tableRow += '<td><button>GO</button></td>';
-        tableRow += '<td><button>OUT</button></td>';
+        var tableRow = '<tr data-id="' + response[i].id + '">';
+        tableRow += '<td data-id="' + response[i].id + '_owner"contenteditable = "true">' + response[i].owner + '</td>';
+        tableRow += '<td data-id="' + response[i].id + '_pet"contenteditable = "true">' + response[i].pet + '</td>';
+        tableRow += '<td data-id="' + response[i].id + '_breed"contenteditable = "true">' + response[i].breed + '</td>';
+        tableRow += '<td data-id="' + response[i].id + '_color"contenteditable = "true">' + response[i].color + '</td>';
+        tableRow += '<td><button data-id="' + response[i].id + '"id="update">GO</button></td>';
+        tableRow += '<td><button id="delete">GO</button></td>';
+        tableRow += '<td data-id="' + response[i].id + '_inout"><button id="check">OUT</button></td>';
         tableRow += '</tr>';
         $('#myTable tr:last').after(tableRow);
       }
     }
   }); //
 }; //end tabelTime
+
+// var updateInfo = function(id) {
+//   var updateToSend = {
+//     name: $('#petName').val(),
+//     color: $('#color').val(),
+//     breed: $('#breed').val(),
+//     owner: $('#owners').val(),
+//     id: $('').val()
+//   };
+//   $.ajax({
+//     type: 'PUT',
+//     url: '/pet/',
+//     data: data,
+//     success: function(response) {
+//       console.log('ribbet:', response);
+//     } //end success
+//   }); //end ajax post
+// };
+// }; //end updateInfo func
