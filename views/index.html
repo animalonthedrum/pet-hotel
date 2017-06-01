@@ -1,31 +1,47 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>PET_HOTEL</title>
-    <script
-  src="https://code.jquery.com/jquery-3.2.1.min.js"
-  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-  crossorigin="anonymous"></script>
-    <script src="script.js" charset="utf-8"></script>
-    <link rel="stylesheet" href="styles.css">
 
-  </head>
-  <body>
-    <h1>PET HOTEL</h1>
-    <div class="register">
-      <h1>Owner Registration</h1>
-      <input id='firstName' type="text" placeholder="First Name">
-      <input id='lastName' type="text" placeholder="Last Name">
-      <button id='registerOwner' type="button" >Register</button>
-      </div>
-      <div class="pets">
-        <select id="owners" name="OwnerName">
+<head>
+  <meta charset="utf-8">
+  <title>PET_HOTEL</title>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="script.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+  <h1>PET HOTEL</h1>
+  <div class="register">
+    <h1>Owner Registration</h1>
+    <input id='firstName' type="text" placeholder="First Name">
+    <input id='lastName' type="text" placeholder="Last Name">
+    <button id='registerOwner' type="button">Register</button>
+  </div>
+  <div class="pets">
+    <select id="owners" name="OwnerName">
           </select>
-        <input id='petName' type="text" placeholder="Pet Name">
-          <input id='color' type="text" placeholder="Color">
-            <input id='breed' type="text" placeholder="Breed">
-            <button id='addPet' type="button">Add Pet</button>
-      </div>
-  </body>
+    <input id='petName' type="text" placeholder="Pet Name">
+    <input id='color' type="text" placeholder="Color">
+    <input id='breed' type="text" placeholder="Breed">
+    <button id='addPet' type="button">Add Pet</button>
+  </div>
+  <div id="table">
+    <table id='myTable'>
+
+      <tr>
+        <th>Owner</th>
+        <th>Pet</th>
+        <th>Breed</th>
+        <th>Color</th>
+        <th>Update</th>
+        <th>Delete</th>
+        <th>Check In/Out</th>
+      </tr>
+
+    </table>
+
+  </div>
+</body>
+
 </html>
