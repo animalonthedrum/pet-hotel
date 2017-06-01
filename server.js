@@ -88,4 +88,9 @@ app.post('/pet', function(req, res) {
   }); //end pool connect
 
 }); //end post
-// app.put('/pet/')
+
+
+app.put('/pet/:id', function(req, res) {
+  console.log(req.body);
+  res.send('poop');
+}); //end put

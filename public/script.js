@@ -5,11 +5,10 @@ $(document).ready(function() {
   $('#addPet').on('click', petInfo);
   dropDown();
   tableTime();
-  // $('#update').on('click', updateInfo);
   $('#myTable').on('click', '#update', function() {
     var id = $(this).data("id");
     console.log(id);
-
+    updateInfo(id);
   });
 
 }); // end on ready
@@ -88,21 +87,20 @@ var tableTime = function() {
   }); //
 }; //end tabelTime
 
-// var updateInfo = function(id) {
-//   var updateToSend = {
-//     name: $('#petName').val(),
-//     color: $('#color').val(),
-//     breed: $('#breed').val(),
-//     owner: $('#owners').val(),
-//     id: $('').val()
-//   };
-//   $.ajax({
-//     type: 'PUT',
-//     url: '/pet/',
-//     data: data,
-//     success: function(response) {
-//       console.log('ribbet:', response);
-//     } //end success
-//   }); //end ajax post
-// };
-// }; //end updateInfo func
+var updateInfo = function(id) {
+  var updateToSend = {
+    name: $('a[data-item-id="' + id + '_pet"]').val(),
+    color: $('a[data-item-id="' + id + '_color"]').val(),
+    breed: $('a[data-item-id="' + id + '_breed"]').val(),
+    owner: $('a[data-item-id="' + id + '_owner"]').val(),
+    id: $('a[data-item-id="' + id + '"]').val()
+  };
+  $.ajax({
+    type: 'PUT',
+    url: '/pet/' + id + '',
+    data: updateToSend,
+    success: function(response) {
+      console.log('ribbet:', response);
+    } //end success
+  }); //end ajax post
+};
