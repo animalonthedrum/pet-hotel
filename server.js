@@ -94,3 +94,20 @@ app.put('/pet/:id', function(req, res) {
   console.log(req.body);
   res.send('poop');
 }); //end put
+
+app.delete('/pet', function(req, res) {
+  console.log('pet delete');
+  pool.connect(function(err, connection, done) {
+    if (err) {
+      console.log('error');
+      done();
+      res.send(400);
+    } else {
+      console.log('connected to database', req.body);
+      connection.query('DELETE FROM pet_table WHERE +id=' + req.body.id);
+      done();
+      res.send(200);
+    } //end else
+  }); //end pool connect
+
+});

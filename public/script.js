@@ -2,9 +2,19 @@ $(document).ready(function() {
   console.log('JQ');
 
   $('#registerOwner').on('click', ownerName);
-  $('#addPet').on('click', petInfo);
-  dropDown();
+  $('#addPet').on('click', function() {
+    petInfo();
+    tableTime();
+  });
   tableTime();
+  dropDown();
+
+  $('#myTable').on('click', '#delete', function() {
+    var id = $(this).data('id');
+    deleteInfo(id);
+    $('#owners').empty();
+    tableTime();
+  });
   $('#myTable').on('click', '#update', function() {
     var id = $(this).data("id");
     console.log(id);
@@ -78,7 +88,7 @@ var tableTime = function() {
         tableRow += '<td data-id="' + response[i].id + '_breed"contenteditable = "true">' + response[i].breed + '</td>';
         tableRow += '<td data-id="' + response[i].id + '_color"contenteditable = "true">' + response[i].color + '</td>';
         tableRow += '<td><button data-id="' + response[i].id + '"id="update">GO</button></td>';
-        tableRow += '<td><button id="delete">GO</button></td>';
+        tableRow += '<td><button data-id="' + response[i].id + '" id="delete">GO</button></td>';
         tableRow += '<td data-id="' + response[i].id + '_inout"><button id="check">OUT</button></td>';
         tableRow += '</tr>';
         $('#myTable tr:last').after(tableRow);
@@ -103,4 +113,21 @@ var updateInfo = function(id) {
       console.log('ribbet:', response);
     } //end success
   }); //end ajax post
+};
+
+var deleteInfo = function(id) {
+  var deleteRow = {
+    id: id
+  };
+  $.ajax({
+    type: 'DELETE',
+    url: '/pet',
+    data: deleteRow,
+    success: function(response) {
+      console.log('back from server with:', response);
+
+    }
+
+
+  });
 };
